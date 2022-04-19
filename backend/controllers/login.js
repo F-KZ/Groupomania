@@ -5,6 +5,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const mysql = require("mysql");
 
+
 // Error Class
 const HttpError = require("../models/http-error");
 
@@ -29,13 +30,13 @@ exports.login = (req, res, next) => {
     }
 
     // Requete de l'utilisateur sur la base de données
-    const string = "SELECT id, email, password, account FROM users WHERE email = ?";
-    const inserts = [email];
-    const sql = db.format(string, inserts);
+    const sqlQuery = "SELECT id, email, password, account FROM users WHERE email = ?";
+    const sqlQueryValues = [email];
+    const sql = mysql.format(string, inserts);
 
-    const query = db.query(sql, (error, user) => {
+    const query = db.query(sqlQuery,sqlQueryValues, (error, user) => {
         // Vérifie que l'objet n'est pas vide (Utilisateur inexistant)
-        if (user.length === 0) {
+        if (!user) {
             return next(new HttpError("Votre adresse e-mail n'est pas valide", 401));
         }
 

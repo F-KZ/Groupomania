@@ -3,7 +3,7 @@
 // Middleware Imports
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const mysql = require("mysql");
+
 const validator = require("validator");
 const passValid = require("secure-password-validator");
 // const passBlackList = require("secure-password-validator/build/main/blacklists/first10_000");
@@ -12,7 +12,7 @@ const passValid = require("secure-password-validator");
 const HttpError = require("../models/http-error");
 
 // Database Route
-const db = require("../config/db.js");
+const {pool} = require ("../config/db");
 
 // Password Validator Options
 const options = {
@@ -51,12 +51,15 @@ exports.signup = (req, res, next) => {
         // Hash du mot de pass de l'utilisateur
         bcrypt.hash(password, 10, (error, hash) => {
             // Enregistrement des donnés de l'utilisateur sur la BD //
-            const string = "INSERT INTO users (firstName, lastName, email, password) VALUES (?, ?, ?, ?)";
-            const inserts = [firstName, lastName, email, hash];
-            const sql = db.format(string, inserts);
+            const sqlQuery = "INSERT INTO users (firstName, lastName, email, password) VALUES ($1, $2, $3, $4)";
+            const sqlQueryValues = [firstName, lastName, email, hash];
+            //const sql = db.format(string, inserts);
 
-            const signupUser = db.query(sql, (error, user) => {
+            const signupUser = pool.query(sqlQuery,sqlQueryValues, (error, user) => {
                 if (!error) {
+                    if (!user){
+                        return next(new HttpError("utilisateur déjà existant", 422));
+                    }
                     // Signe le id de l'utilisateur et retourne un JWT dans l'entete
                     res.status(201).json({
                         message: "Utilisateur créé correctement",
@@ -74,7 +77,8 @@ exports.signup = (req, res, next) => {
                         ),
                     });
                 } else {
-                    return next(new HttpError("Utilisateur déjà existant", 400));
+                    console.log("erreur lors du signup : ",error);
+                    return next(new HttpError("erreur innatendu", 500));
                 }
             });
         });
