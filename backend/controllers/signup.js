@@ -12,7 +12,7 @@ const passValid = require("secure-password-validator");
 const HttpError = require("../models/http-error");
 
 // Database Route
-const {pool} = require ("../config/db");
+const db = require("../config/db");
 
 // Password Validator Options
 const options = {
@@ -34,9 +34,49 @@ const options = {
     symbols: false,
 };
 
+const createUserAndSendResponse = (firstName, lastName, email, hash, res, next) => {
+    // Enregistrement des donnés de l'utilisateur sur la BD //
+    const sqlQuery = "INSERT INTO users (firstName, lastName, email, password) VALUES (?,?,?,?)";
+    const sqlQueryValues = [firstName, lastName, email, hash];
+
+    db.query(sqlQuery, sqlQueryValues)
+        .then(user => {
+            // Signe le id de l'utilisateur et retourne un JWT dans l'entete
+            console.log("POST Signup - END - Status 201");
+            res.status(201).json({
+                message: "Utilisateur créé correctement",
+                userId: user.insertId,
+                account: "user",
+                token: jwt.sign(
+                    {
+                        userId: user.insertId,
+                        account: "user",
+                    },
+                    process.env.JWT_SECRET,
+                    {
+                        expiresIn: process.env.JWT_EXPIRES,
+                    }
+                ),
+            });
+        })
+        .catch(error => {
+            if (error.code === 'ER_DUP_ENTRY') {
+                console.log("POST Signup - END - Status 422");
+                return next(new HttpError("utilisateur déjà existant", 422));
+            }
+
+            console.error("POST Signup - ERROR - Status 500");
+            console.error(error.stack);
+            throw error;
+        });
+}
+
 // POST Create User Controller
-exports.signup = (req, res, next) => {
-    const { firstName, lastName, email, password } = req.body;
+exports.signup = async (req, res, next) => {
+    console.log("POST - SIGNUP - START");
+    
+
+    const {firstName, lastName, email, password} = req.body;
 
     // RegEx Text
     const regExText = /^[A-ZÀÂÆÇÉÈÊËÏÎÔŒÙÛÜŸ \'\- ]+$/i;
@@ -47,42 +87,7 @@ exports.signup = (req, res, next) => {
     let isEmail = validator.isEmail(String(email));
     let isPassword = passValid.validate(String(password), options).valid;
 
-    if (isFirstName && isLastName && isEmail && isPassword) {
-        // Hash du mot de pass de l'utilisateur
-        bcrypt.hash(password, 10, (error, hash) => {
-            // Enregistrement des donnés de l'utilisateur sur la BD //
-            const sqlQuery = "INSERT INTO users (firstName, lastName, email, password) VALUES ($1, $2, $3, $4)";
-            const sqlQueryValues = [firstName, lastName, email, hash];
-            //const sql = db.format(string, inserts);
-
-            const signupUser = pool.query(sqlQuery,sqlQueryValues, (error, user) => {
-                if (!error) {
-                    if (!user){
-                        return next(new HttpError("utilisateur déjà existant", 422));
-                    }
-                    // Signe le id de l'utilisateur et retourne un JWT dans l'entete
-                    res.status(201).json({
-                        message: "Utilisateur créé correctement",
-                        userId: user.insertId,
-                        account: "user",
-                        token: jwt.sign(
-                            {
-                                userId: user.insertId,
-                                account: "user",
-                            },
-                            process.env.JWT_SECRET,
-                            {
-                                expiresIn: process.env.JWT_EXPIRES,
-                            }
-                        ),
-                    });
-                } else {
-                    console.log("erreur lors du signup : ",error);
-                    return next(new HttpError("erreur innatendu", 500));
-                }
-            });
-        });
-    } else if (!isFirstName || !isLastName || !isEmail || !isPassword) {
+    if (!isFirstName || !isLastName || !isEmail || !isPassword) {
         // Error Handling
         let errorMessages = [];
 
@@ -92,6 +97,12 @@ exports.signup = (req, res, next) => {
         anws = !isPassword ? errorMessages.push(" Mot de passe") : "";
         errorMessages = errorMessages.join();
 
+        console.log("POST Signup - END - Status 400");
         return next(new HttpError("Veuillez vérifier les champs suivants :" + errorMessages, 400));
     }
+    
+
+    // Hash du mot de pass de l'utilisateur
+    const hash = await bcrypt.hash(password, 10);
+    createUserAndSendResponse(firstName, lastName, email, hash, res, next);
 };

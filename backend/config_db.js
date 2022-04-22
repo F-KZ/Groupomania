@@ -1,4 +1,4 @@
-/* const mysql = require("mysql");
+const mysql = require("mysql");
 require("dotenv").config();
 
 const connectParams = mysql.createConnection({
@@ -53,7 +53,7 @@ const reactionsTable =
     "CREATE TABLE `reactions` (`Posts_id` int NOT NULL, `Users_id` int NOT NULL, `reaction` varchar(45) COLLATE utf8_bin NOT NULL, PRIMARY KEY (`Posts_id`,`Users_id`), KEY `fk_Likes_Users1_idx` (`Users_id`), KEY `fk_Reactions_Posts1_idx` (`Posts_id`), CONSTRAINT `fk_Likes_Users1` FOREIGN KEY (`Users_id`) REFERENCES `users` (`id`) ON DELETE CASCADE, CONSTRAINT `fk_Reactions_Posts1` FOREIGN KEY (`Posts_id`) REFERENCES `posts` (`id`) ON DELETE CASCADE) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;";
 
 const globalSelect = "SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''));";
-*/
+
 
 const runQuery = (query) => {
     return new Promise((resolve, reject) => {

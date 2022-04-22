@@ -3,16 +3,13 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "node server",
+    "dev": "npx nodemon server.js",
     "start": "node server.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/F-KZ/FranckKanza_7_29-03-2022-.git"
   },
-  "keywords": [
-    ""
-  ],
   "author": "franck-kanza",
   "license": "ISC",
   "bugs": {
@@ -33,8 +30,6 @@
     "mysql": "^2.18.1",
     "mysql2": "^2.3.3",
     "nodemon": "^2.0.15",
-    "pg": "^8.7.3",
-    "postgres": "*",
     "secure-password-validator": "^1.0.2",
     "toobusy-js": "^0.5.1",
     "validator": "^13.7.0"

@@ -7,14 +7,13 @@ import Post from "../../components/Post/Post";
 import styles from "./PostList.module.css";
 
 const PostList = (props) => {
-    if (props.items.length === 0) {
+    if (props.items.length === null) {
         return (
             <div className={styles.container}>
                 <h2>No Posts Created</h2>
             </div>
         );
     }
-
     return (
         <>
             {props.items.map((post) => {
@@ -41,6 +40,12 @@ const PostList = (props) => {
             })}
         </>
     );
+    
 };
+
+console.log('fin de fonction');
+
+
+
 
 export default PostList;

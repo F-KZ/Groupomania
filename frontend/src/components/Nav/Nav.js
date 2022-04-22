@@ -26,6 +26,7 @@ const Nav = (props) => {
         e.preventDefault();
         props.history.goBack();
     };
+    console.log("NAV:switch");
 
     let nav;
 
