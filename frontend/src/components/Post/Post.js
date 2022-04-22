@@ -11,10 +11,10 @@ import Spinner from "../../components/LoadingSpinner/LoadingSpinner";
 // Styles
 import styles from "./Post.module.css";
 
-// manejar el useState de manera local para los likes
+// gérer useState localement pour les likes
 
 const Post = (props) => {
-    // Authentication context
+    // Contexte d'authentification
     const auth = useContext(AuthContext);
 
     // Request Hook

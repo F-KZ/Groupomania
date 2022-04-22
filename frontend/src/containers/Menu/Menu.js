@@ -3,6 +3,7 @@ import { Link, useHistory } from "react-router-dom";
 import { useWindowDimensions } from "../../hooks/window-hook";
 import { useHttpRequest } from "../../hooks/httpRequest-hook";
 import { AuthContext } from "../../context/auth-context";
+import axios from "axios";
 
 // Static Images
 import GenProfile from "../../images/generic_profile_picture.jpg";
@@ -42,7 +43,14 @@ const Menu = () => {
         let mounted = true;
 
         if (auth.token && auth.userId) {
-            const fetchPosts = async () => {
+            axios.get(`${process.env.REACT_APP_API_URL}/profile/${auth.userId}`, {
+                headers: {
+                    authorization: "Bearer " + auth.token
+                }
+            })
+                .then(res => setProfileData(res.data))
+                .catch(err => console.log(err))
+        /*    const fetchPosts = async () => {
                 try {
                     const userData = await sendRequest(
                         `${process.env.REACT_APP_API_URL}/profile/${auth.userId}`,
@@ -56,12 +64,13 @@ const Menu = () => {
                         setProfileData(userData);
                     }
                 } catch (err) {}
-            };
+            }; 
             fetchPosts();
         }
 
-        return () => (mounted = false);
-    }, [sendRequest, auth.token, auth.userId, setProfileData]);
+        return () => (mounted = false); */
+    }; 
+    }, sendRequest, auth.token, auth.userId, setProfileData); 
 
     const logoutHandler = (event) => {
         event.preventDefault();

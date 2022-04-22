@@ -3,6 +3,7 @@ import { AuthContext } from "../../context/auth-context";
 import { Link } from "react-router-dom";
 import { useHttpRequest } from "../../hooks/httpRequest-hook";
 import { useWindowDimensions } from "../../hooks/window-hook";
+import axios from "axios";
 
 // Icons
 import clockIcon from "../../images/clock-icon.svg";
@@ -37,18 +38,27 @@ const Posts = () => {
         mostLiked: "",
     });
 
+
     // Fetch Initial
-    useEffect(() => {
-        const fetchPosts = async () => {
-            try {
-                const postsData = await sendRequest(`${process.env.REACT_APP_API_URL}/posts`, "GET", null, {
-                    Authorization: "Bearer " + auth.token,
-                });
-                setPosts(postsData);
-            } catch (err) {}
-        };
-        fetchPosts();
-    }, [sendRequest, auth.token]);
+useEffect(() => {
+    axios.get(`$(process.env.REACT_APP_API_URL)/posts`, {
+        headers: {
+            authorization: "Bearer " + auth.token
+        }
+    })
+        .then(res => setPosts(res.data))
+        .catch(err => console.log(err))
+    /*  const fetchPosts = async () => {
+          try {
+              const postsData = await sendRequest(`${process.env.REACT_APP_API_URL}/posts`, "GET", null, {
+                  Authorization: "Bearer " + auth.token,
+              });
+              setPosts(postsData);
+          } catch (err) {}
+      };
+      fetchPosts();*/
+}, sendRequest, auth.token);
+   
 
     // Fetch Most recent posts
     const fetchMostRecent = async () => {
@@ -103,16 +113,18 @@ const Posts = () => {
                 <TabBtn name="LES PLUS AIMÉS" icon={coffeeIcon} active={activeBtn.mostLiked} onClick={fetchMostLiked} />
                 {newPost}
             </nav>
+            
             <div className="container">
                 {isLoading && (
                     <div className="spinner">
                         <Spinner />
                     </div>
                 )}
-                {!isLoading && activeBtn && posts && <PostList items={posts} onDeletePost={deletePostHandler} />}
+                {(!isLoading && activeBtn && posts) && <PostList items={posts} onDeletePost={deletePostHandler} />}
             </div>
         </>
     );
-};
+}
+
 
 export default Posts;

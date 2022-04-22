@@ -6,8 +6,8 @@ import Post from "../../components/Post/Post";
 // Styles
 import styles from "./PostList.module.css";
 
-const PostList = (props) => {
-    if (props.items.length === null) {
+const PostList = ({items,onDeletePost}) => {
+    if (items.length === null) {
         return (
             <div className={styles.container}>
                 <h2>No Posts Created</h2>
@@ -16,7 +16,7 @@ const PostList = (props) => {
     }
     return (
         <>
-            {props.items.map((post) => {
+            {items.map((post) => {
                 return (
                     <Post
                         key={post.post_id}
@@ -34,7 +34,7 @@ const PostList = (props) => {
                         comments={post.comments}
                         userReaction={post.userReaction}
                         post_link={`/posts/${post.post_id}`}
-                        onDelete={props.onDeletePost}
+                        onDelete={onDeletePost}
                     />
                 );
             })}
@@ -43,7 +43,7 @@ const PostList = (props) => {
     
 };
 
-console.log('fin de fonction');
+
 
 
 
