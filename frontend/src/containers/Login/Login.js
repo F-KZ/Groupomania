@@ -4,6 +4,7 @@ import { useForm } from "../../hooks/form-hook";
 import { useHttpRequest } from "../../hooks/httpRequest-hook";
 import { AuthContext } from "../../context/auth-context";
 import { isEmail, MinLength } from "../../utils/validators";
+import axios from "axios";
 
 // Static Images
 import logo from "../../images/logo.png";

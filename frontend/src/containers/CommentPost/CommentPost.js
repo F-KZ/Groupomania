@@ -4,6 +4,7 @@ import { useHttpRequest } from "../../hooks/httpRequest-hook";
 import { useForm } from "../../hooks/form-hook";
 import { AuthContext } from "../../context/auth-context";
 import { MinLength, MaxLength } from "../../utils/validators";
+import axios from "axios";
 
 //Icons
 import send from "../../images/send-icon.svg";
@@ -47,6 +48,17 @@ const CommentPost = () => {
 
     // Fetch Post
     useEffect(() => {
+        let mounted = true;
+
+        if (auth.token && auth.postId) {
+            axios.get(`${process.env.REACT_APP_API_URL}/posts/${postId}`, {
+                headers: {
+                    authorization: "Bearer " + auth.token
+                }
+            })
+                .then(res => setPost(res.data))
+                .catch(err => console.log(err))
+  /*  useEffect(() => {
         const fetchPost = async () => {
             try {
                 const post = await sendRequest(`${process.env.REACT_APP_API_URL}/posts/${postId}`, "GET", null, {
@@ -54,9 +66,9 @@ const CommentPost = () => {
                 });
                 setPost(post[0]);
                 setComments(post[1].comments);
-            } catch (err) {}
+            } catch (err) {} */
         };
-        fetchPost();
+      //  fetchPost(); 
     }, [sendRequest, setPost, auth.token, postId, setComments]);
 
     // POST comment Handler

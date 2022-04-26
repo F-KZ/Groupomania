@@ -8,7 +8,7 @@ export const useHttpRequest = () => {
     const activeRequest = useRef([]);
 
     // Fonction fetch avec callBack pour eviter des loops infinits
-    const url = ("${process.env.REACT_APP_API_URL}");
+    //const url = ('http://localhost:3001');
     const sendRequest = useCallback(async (url, method = "", body = null, headers = {}) => {
         setIsLoading(true);
         const httpAbortCtrl = new AbortController();
@@ -16,7 +16,7 @@ export const useHttpRequest = () => {
         
 
         try {
-            const response = await fetch(url,{
+            const response = await fetch('http://localhost:3000',"GET", {
                 method,
                 body,
                 headers,

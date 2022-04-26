@@ -5,6 +5,7 @@ import { useForm } from "../../hooks/form-hook";
 import { useWindowDimensions } from "../../hooks/window-hook";
 import { useHttpRequest } from "../../hooks/httpRequest-hook";
 import { MinLength, MaxLength } from "../../utils/validators";
+import axios from "axios";
 
 // icons
 import backIcon from "../../images/back-icon.svg";
@@ -57,16 +58,17 @@ const NewPost = (props) => {
 
     //Fetch Categories
     useEffect(() => {
-        const fetchPosts = async () => {
-            try {
-                const categories = await sendRequest(`${process.env.REACT_APP_API_URL}/posts/categories`, "GET", null, {
-                    Authorization: "Bearer " + auth.token,
-                });
+                axios.get(`${process.env.REACT_APP_API_URL}/posts/categories`, {
+                    headers: {
+                        authorization: "Bearer " + auth.token
+                    }
+                })
+                .then(res => categories(res.data))
+            .catch(err => console.log(err));
 
-                setCategories(categories);
-            } catch (err) {}
-        };
-        fetchPosts();
+               
+        
+       
     }, [sendRequest, auth.token, setCategories]);
 
     // Send Post au Backend

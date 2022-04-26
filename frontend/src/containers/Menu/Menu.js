@@ -67,7 +67,6 @@ const Menu = () => {
             }; 
             fetchPosts();
         }
-
         return () => (mounted = false); */
     }; 
     }, sendRequest, auth.token, auth.userId, setProfileData); 
