@@ -4,7 +4,6 @@ import { useForm } from "../../hooks/form-hook";
 import { useHttpRequest } from "../../hooks/httpRequest-hook";
 import { AuthContext } from "../../context/auth-context";
 import { isEmail, MinLength } from "../../utils/validators";
-import axios from "axios";
 
 // Static Images
 import logo from "../../images/logo.png";
@@ -58,7 +57,7 @@ const Login = () => {
             };
 
             const responseData = await sendRequest(
-                ` http://localhost:3001/login`,
+                `${process.env.REACT_APP_API_URL}/login`,
                 "POST",
                 JSON.stringify(data),
                 {

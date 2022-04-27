@@ -26,7 +26,8 @@ exports.login = async (req, res, next) => {
     const sqlQueryValues = [email];
 
     db.query(sqlQuery, sqlQueryValues)
-        .then(user => {
+        .then(userFound => {
+            const user = userFound[0];
             console.log("USER FOUND : ", user);
             // Vérifie que l'objet n'est pas vide (Utilisateur inexistant)
             if (!user || user[0].length === 0) {
@@ -35,6 +36,8 @@ exports.login = async (req, res, next) => {
             }
 
             // Comparaison entre le hash et le mot de passe
+            console.log('password',user[0].password);
+
            bcrypt.compare(password, user[0].password).then((valid) => {
                 if (!valid) return next(new HttpError("Votre mot de passe n'est pas valide", 401));
                 // Signe le id de l'utilisateur et retourne un JWT dans l'entête

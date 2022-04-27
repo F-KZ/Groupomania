@@ -16,7 +16,7 @@ export const useHttpRequest = () => {
         
 
         try {
-            const response = await fetch('http://localhost:3000',"GET", {
+            const response = await fetch(url, {
                 method,
                 body,
                 headers,
@@ -42,6 +42,8 @@ export const useHttpRequest = () => {
             throw err;
         }
     }, []);
+   
+
 
     const clearError = () => {
         setError(null);
