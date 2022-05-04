@@ -30,7 +30,7 @@ const Posts = () => {
     const { isLoading, error, sendRequest, clearError } = useHttpRequest();
 
     //Posts State
-    const [posts, setPosts] = useState();
+    const [posts, setPosts] = useState([]);
 
     // Tab Btn State
     const [activeBtn, setActiveBtn] = useState({
@@ -41,12 +41,12 @@ const Posts = () => {
 
     // Fetch Initial
 useEffect(() => {
-    axios.get(`$(process.env.REACT_APP_API_URL)/posts`, {
+    axios.get(`${process.env.REACT_APP_API_URL}/posts`, {
         headers: {
             authorization: "Bearer " + auth.token
         }
     })
-        .then(res => setPosts(res.data))
+        .then((res) => { console.log( res.data ); setPosts(res.data); } )
         .catch(err => console.log(err))
     /*  const fetchPosts = async () => {
           try {
@@ -57,7 +57,7 @@ useEffect(() => {
           } catch (err) {}
       };
       fetchPosts();*/
-}, sendRequest, auth.token);
+}, [sendRequest, auth.token] ); 
    
 
     // Fetch Most recent posts
