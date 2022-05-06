@@ -14,7 +14,7 @@ const PostList = ({items,onDeletePost}) => {
             </div>
         );
     }
-   // console.log(items);
+console.log(items);
     return (
         <>
             {items.map((post) => {

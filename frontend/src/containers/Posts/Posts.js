@@ -57,7 +57,8 @@ useEffect(() => {
           } catch (err) {}
       };
       fetchPosts();*/
-}, [sendRequest, auth.token] ); 
+}, [sendRequest, auth.token, setPosts] ); 
+
    
 
     // Fetch Most recent posts
@@ -113,7 +114,7 @@ useEffect(() => {
                 <TabBtn name="LES PLUS AIMÉS" icon={coffeeIcon} active={activeBtn.mostLiked} onClick={fetchMostLiked} />
                 {newPost}
             </nav>
-            
+        
             <div className="container">
                 {isLoading && (
                     <div className="spinner">
@@ -125,6 +126,7 @@ useEffect(() => {
         </>
     );
 }
+
 
 
 export default Posts;

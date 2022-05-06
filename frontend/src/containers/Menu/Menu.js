@@ -103,6 +103,7 @@ const Menu = () => {
             </div>
         );
     }
+    console.log(!profileData);
 
     if (!profileData) {
         return (
@@ -114,6 +115,7 @@ const Menu = () => {
             </>
         );
     }
+    
 
     return (
         <>
