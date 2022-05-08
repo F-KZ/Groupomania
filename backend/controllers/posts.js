@@ -178,7 +178,7 @@ exports.getAllPosts = (req, res, next) => {
             }
             return finalPost;
         } catch (err) {
-            return new Error(err);
+            throw new Error(err);
         }
     };
 

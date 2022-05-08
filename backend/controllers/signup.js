@@ -54,7 +54,7 @@ const createUserAndSendResponse = (firstName, lastName, email, hash, res, next) 
                     },
                     process.env.JWT_SECRET,
                     {
-                        expiresIn: process.env.JWT_EXPIRES,
+                        expiresIn: parseInt (process.env.JWT_EXPIRES),
                     }
                 ),
             });
