@@ -26,7 +26,7 @@ const App = () => {
     if (token) {
         routes = (
             <Switch>
-                <Route path="/posts" exact component={Posts} />
+                <Route path="/posts" exact component={Posts} /> 
                 <Route path="/posts/new" exact component={NewPost} />
                 <Route path="/menu" exact component={Menu} />
                 <Route path="/profile/:id" exact component={UserProfile} />
