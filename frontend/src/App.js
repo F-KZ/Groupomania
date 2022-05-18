@@ -20,9 +20,8 @@ import "./App.css";
 
 
 const getRoutes = (token) => {
-    let routes;
-    if(token) {
-        routes = (
+    if (token) {
+        return (
             <Switch>
                 <Route path="/posts" exact component={Posts} />
                 <Route path="/posts/new" exact component={NewPost} />
@@ -33,18 +32,15 @@ const getRoutes = (token) => {
                 {<Redirect to="/posts" />}
             </Switch>
         );
-    } else {
-        routes = (
-            <Switch>
-                <Route path="/" exact component={Home} />
-                <Route path="/login" exact component={Login} />
-                <Route path="/signup" exact component={Signup} />
-                {<Redirect to="./containers/Menu/Menu" />}
-            </Switch>
-        );
     }
-    return routes
-
+    return (
+        <Switch>
+            <Route path="/" exact component={Home} />
+            <Route path="/login" exact component={Login} />
+            <Route path="/signup" exact component={Signup} />
+            {<Redirect to="./containers/Menu/Menu" />}
+        </Switch>
+    );
 }
 
 
