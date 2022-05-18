@@ -40,7 +40,7 @@ const Menu = () => {
 
     //Fetch Most recent posts
     useEffect(() => {
-        let mounted = true;
+       // let mounted = true;
 
         if (auth.token && auth.userId) {
             axios.get(`${process.env.REACT_APP_API_URL}/profile/${auth.userId}`, {
@@ -69,7 +69,7 @@ const Menu = () => {
         }
         return () => (mounted = false); */
     }; 
-    }, sendRequest, auth.token, auth.userId, setProfileData); 
+    }, [sendRequest, auth.token, auth.userId, setProfileData]); 
 
     const logoutHandler = (event) => {
         event.preventDefault();
