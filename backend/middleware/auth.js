@@ -9,18 +9,20 @@ const HttpError = require("../models/http-error");
 
 // Middleware config.
 module.exports = (req, res, next) => {
-    try {
+    if (req.headers.authorization) {
         const token = req.headers.authorization.split(" ")[1];
         const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
         const userId = decodedToken.userId;
+
         if (req.body.userId && req.body.userId !== userId) {
             throw next(new HttpError("Non authorisé", 401));
         } else {
-            
+
             next();
         }
-    } catch (error){
-        console.log(error)
-        return next(new HttpError("Non identifié(e) voir back auth.js ligne 23", 401));
+
+    } else {
+        throw next(new HttpError("Header authorization non renseigné", 400));
     }
+
 };
