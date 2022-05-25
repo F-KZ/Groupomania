@@ -6,23 +6,20 @@ const jwt = require("jsonwebtoken");
 // Error Class
 const HttpError = require("../models/http-error");
 
+const validateToken = (authorizationHeader, userIdFromRequest) => {
+    const token = authorizationHeader.split(" ")[1];
+    const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+    const isNotUserIdValid = userIdFromRequest && userIdFromRequest !== decodedToken.userId;
+
+    if (isNotUserIdValid) throw next(new HttpError("Non authorisé", 401));
+}
 
 // Middleware config.
 module.exports = (req, res, next) => {
-    if (req.headers.authorization) {
-        const token = req.headers.authorization.split(" ")[1];
-        const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
-        const userId = decodedToken.userId;
+    const authorizationHeader = req.headers.authorization;
 
-        if (req.body.userId && req.body.userId !== userId) {
-            throw next(new HttpError("Non authorisé", 401));
-        } else {
+    if (!authorizationHeader) throw next(new HttpError("Header authorization non renseigné", 400));
+    validateToken(authorizationHeader, req.body.userId);
 
-            next();
-        }
-
-    } else {
-        throw next(new HttpError("Header authorization non renseigné", 400));
-    }
-
+    next();
 };
