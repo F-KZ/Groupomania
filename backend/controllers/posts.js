@@ -10,6 +10,7 @@ const HttpError = require("../models/http-error");
 
 // Database Route
 const db = require("../config/db");
+const { resolve } = require("path");
 
 // UserID decoder
 const decodeUid = (authorization) => {
@@ -38,13 +39,13 @@ exports.createPost = (req, res, next) => {
     const inserts = [user.id, category, title, imageUrl];
     const sql = db.format(string, inserts);
 
-    const createPost = db.query(sql, (error, post) => {
+    const createPost = db.query(sql).then(resolve).catch(reject);
         if (!error) {
             res.status(201).json({ message: "Publication sauvegardée" });
         } else {
             return next(new HttpError("Erreur de requête, la publication n'a pas été créée", 500));
         }
-    });
+    ;
 };
 
 // POST Create Comment Controller
@@ -136,10 +137,8 @@ exports.getAllPosts = (req, res, next) => {
                 const sql = db.format(string, inserts);
 
                 // Requête
-                const getPosts = db.query(sql, (error, posts) => {
-                    if (error) reject(error);
-                    resolve(posts);
-                });
+                const getPosts = db.query(sql).then(resolve).catch(reject);
+                
             } catch (err) {
                 reject(err);
             }

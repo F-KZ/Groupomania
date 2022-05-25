@@ -40,22 +40,19 @@ const Menu = () => {
 
     //Fetch Most recent posts
     useEffect(() => {
-       // let mounted = true;
+        let mounted = true;
 
-        if (auth.token && auth.userId) {
+       /* if (auth.token && auth.userId) {
             axios.get(`${process.env.REACT_APP_API_URL}/profile/${auth.userId}`, {
                 headers: {
                     authorization: "Bearer " + auth.token
                 }
             })
                 .then(res => setProfileData(res.data))
-                .catch(err => console.log(err))
-        /*    const fetchPosts = async () => {
+                .catch(err => console.log(err)) */
+            const fetchPosts = async () => {
                 try {
-                    const userData = await sendRequest(
-                        `${process.env.REACT_APP_API_URL}/profile/${auth.userId}`,
-                        "GET",
-                        null,
+                    const userData = await axios.get(`${process.env.REACT_APP_API_URL}/profile/${auth.userId}`,
                         {
                             Authorization: "Bearer " + auth.token,
                         }
@@ -66,10 +63,10 @@ const Menu = () => {
                 } catch (err) {}
             }; 
             fetchPosts();
-        }
-        return () => (mounted = false); */
-    }; 
-    }, [sendRequest, auth.token, auth.userId, setProfileData]); 
+        
+       // return () => (mounted = false); 
+   // }; 
+    }, [sendRequest,auth.token, auth.userId,setProfileData]); 
 
     const logoutHandler = (event) => {
         event.preventDefault();

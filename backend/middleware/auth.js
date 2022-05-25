@@ -6,6 +6,7 @@ const jwt = require("jsonwebtoken");
 // Error Class
 const HttpError = require("../models/http-error");
 
+
 // Middleware config.
 module.exports = (req, res, next) => {
     try {
@@ -15,10 +16,11 @@ module.exports = (req, res, next) => {
         if (req.body.userId && req.body.userId !== userId) {
             throw next(new HttpError("Non authorisé", 401));
         } else {
-            //pasar datos?
+            
             next();
         }
-    } catch {
-        return next(new HttpError("Non identifié(e)", 401));
+    } catch (error){
+        console.log(error)
+        return next(new HttpError("Non identifié(e) voir back auth.js ligne 23", 401));
     }
 };
