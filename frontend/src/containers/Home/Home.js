@@ -6,6 +6,7 @@ import logo from "../../images/logo.png";
 // Styles
 import "./Home.css";
 
+
 const Home = () => {
     return (
         <div className="background_image">
