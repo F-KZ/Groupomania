@@ -29,7 +29,11 @@
 
 .wrapper {
     display: flex;
-    flex-direction: row;
+    flex-direction: row-reverse;
+    width: 100%;
+    /* height: 50px; */
+    flex-wrap: nowrap;
+    align-items: stretch;
 }
 
 .input_height {
@@ -42,9 +46,20 @@
 }
 
 .icon {
-    width: 1.6rem;
-    margin: auto 0 auto 1rem;
+       /* width: 1.6rem; */
+    /* margin: auto 0 auto 1rem; */
     color: black;
+    background-color: #fff;
+    border-radius: 3px 0px 0px 3px;
+    color: #000;
+    padding: 10px;
+    /* display: block; */
+    /* float: left; */
+    height: 48px;
+    font-size: 24px;
+    line-height: 50px;
+    /* text-align: center; */
+    width: 60px;
 }
 
 .box {
@@ -80,14 +95,14 @@
 }
 
 .white_box {
-    font-family: "Montserrat", "Roboto";
-    font-size: 1.5rem;
-    font-weight: 500;
-    color: white;
+    background-color: #fff;
+    border-radius: 0px 3px 3px 0px;
+    color: #000;
+    
+    padding: 0 16px;
+    /* width: 200px; */
     width: 100%;
-    padding: 0;
-    background-color: transparent;
-    border: 0;
+    height: 50px;
 }
 
 .white_box::placeholder {

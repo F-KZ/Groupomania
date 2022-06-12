@@ -2,6 +2,8 @@ import React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import { useAuth } from "./hooks/auth-hook";
 import { AuthContext } from "./context/auth-context";
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 // Containers
 import Layout from "./containers/Layout/Layout";
@@ -35,10 +37,10 @@ const getRoutes = (token) => {
     }
     return (
         <Switch>
-            <Route path="/" exact component={Home} />
-            <Route path="/login" exact component={Login} />
+            <Route path="/home" exact component={Home} />
+            <Route path="/" exact component={Login} />
             <Route path="/signup" exact component={Signup} />
-            {<Redirect to="./containers/Menu/Menu" />}
+            {<Redirect to="./Menu" />}
         </Switch>
     );
 }

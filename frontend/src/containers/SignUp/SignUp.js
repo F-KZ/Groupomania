@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { useForm } from "../../hooks/form-hook";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { AuthContext } from "../../context/auth-context";
 import { useHttpRequest } from "../../hooks/httpRequest-hook";
 import { isEmail, MinLength, isText } from "../../utils/validators";
@@ -20,6 +20,7 @@ import InputField from "../../components/InputField/InputField";
 // Styles
 import "../../containers/Home/Home.css";
 import styles from "./Signup.module.css";
+import "../Home/Home.css";
 
 const SignUp = () => {
     // Authentication context
@@ -154,10 +155,15 @@ const SignUp = () => {
                         initialValue={formState.inputs.password.value}
                         initialValid={formState.inputs.password.isValid}
                     />
+                    <div className="link">
+                        <Link className="signUp" to={"/SignUp"}>
+                            Connexion
+                        </Link>
+                    </div>
                 </form>
                 <p className="error_message">{error}</p>
             </div>
-            <div className="background_blur"></div>
+           
         </>
     );
 };

@@ -76,7 +76,8 @@ const Nav = (props) => {
 
     return (
         <footer>
-            <div className="nav_btn_list">{nav}</div>
+            <div className="nav_btn_list">{nav}
+            </div>
         </footer>
     );
 };

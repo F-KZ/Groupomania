@@ -76,7 +76,7 @@ const Menu = () => {
 
     // Affichage Navlinks en desktop
     let navLinks;
-    if (width >= 1024) {
+    if (width >= 700) {
         navLinks = (
             <>
                 <Link to="/posts" className={`${styles.btn} ${styles.border}`}>
