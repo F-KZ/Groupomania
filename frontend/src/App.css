@@ -86,12 +86,12 @@ a:link {
 
 #linkSignup {
   font-size: 20px;
-  color: rgb(187, 17, 17);
+  color: #0095f6;
 }
 
 #linkLogin {
   font-size: 20px;
-  color: blue;
+  color: #0095f6;
 }
 
 #linkSignup:hover {

@@ -18,15 +18,15 @@ const Home = () => {
         </div>
         <div className="card-footer">
           <p>
-            Si vous avez déja un compte,{" "}
+            Déjà inscrit ? {" "}
             <Link id="linkLogin" to="/login">
-              connectez vous !
+              Connectez vous !
             </Link>
           </p>
           <p>
-            Si vous souhaitez vous inscrire{" "}
+            Rejoignez nous{" "}
             <Link id="linkSignup" to="/signup">
-              c'est par la !
+              Inscription
             </Link>
           </p>
         </div>
