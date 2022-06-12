@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import balloons from "../assets/homeBalloons.png";
+import balloons from "../assets/sociale.jpeg";
 
 const Home = () => {
   return (
