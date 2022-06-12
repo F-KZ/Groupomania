@@ -1,71 +1,104 @@
-import React from "react";
-import { Route, Switch, Redirect } from "react-router-dom";
-import { useAuth } from "./hooks/auth-hook";
-import { AuthContext } from "./context/auth-context";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import React, { useEffect, useState } from "react";
+import { BrowserRouter as Router, Link } from "react-router-dom";
+import Cookie from "js-cookie";
+//import components
+import Routes from "./components/utils/Routes.jsx";
+import AuthApi from "./components/utils/AuthApi.jsx";
+import Logout from "./components/utils/Logout.jsx";
+//import css
+import { Navbar, Nav, Container } from "react-bootstrap";
+import "./app.css";
+//import logo
+import logo from "./assets/logo.png";
+import icon from "./assets/icon.png";
 
+export default function App() {
+  const [auth, setAuth] = useState(false);
 
-// Containers
-import Layout from "./containers/Layout/Layout";
-import Home from "./containers/Home/Home";
-import Login from "./containers/Login/Login";
-import Signup from "./containers/SignUp/SignUp";
-import Posts from "./containers/Posts/Posts";
-import Menu from "./containers/Menu/Menu";
-import UserProfile from "./containers/UserProfile/UserProfile";
-import UpdateProfile from "./containers/UpdateProfile/UpdateProfile";
-import CommentPost from "./containers/CommentPost/CommentPost";
-import NewPost from "./containers/NewPost/NewPost";
-
-// Styles
-import "./App.css";
-
-
-const getRoutes = (token) => {
-    if (token) {
-        return (
-            <Switch>
-                <Route path="/posts" exact component={Posts} />
-                <Route path="/posts/new" exact component={NewPost} />
-                <Route path="/menu" exact component={Menu} />
-                <Route path="/profile/:id" exact component={UserProfile} />
-                <Route path="/profile/:id/update" exact component={UpdateProfile} />
-                <Route path="/posts/:id" exact component={CommentPost} />
-                {<Redirect to="/posts" />}
-            </Switch>
-        );
+  useEffect(function () {
+    if (Cookie.get("user")) {
+      setAuth(true);
     }
-    return (
-        <Switch>
-            <Route path="/home" exact component={Home} />
-            <Route path="/" exact component={Login} />
-            <Route path="/signup" exact component={Signup} />
-            {<Redirect to="./Menu" />}
-        </Switch>
+  }, []);
+
+  let navLink;
+  if (auth === true) {
+    navLink = (
+      <Navbar fixed="top" expand="sm" bg="dark" variant="dark">
+        <Container>
+          <div>
+            <Link to="/articles" className="nav-link">
+              {window.screen.width > 500 ? (
+                <img src={logo} alt="Le logo de l'entreprise Groupomania" />
+              ) : (
+                <img
+                  src={icon}
+                  alt="Le logo miniature de l'entreprise Groupomania"
+                />
+              )}
+            </Link>
+          </div>
+          <Navbar.Toggle aria-controls="navbarResponsive" />
+          <Navbar.Collapse
+            id="navbarResponsive"
+            className="justify-content-end"
+          >
+            <Nav className="d-flex align-items-end">
+              <Link to="/articles" className="nav-link mx-4">
+                Tous les articles
+              </Link>
+              <Link to="/user" className="nav-link mx-4">
+                Mon compte
+              </Link>{" "}
+              <Logout />
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
     );
+  } else {
+    navLink = (
+      <Navbar fixed="top" expand="sm" bg="dark" variant="dark">
+        <Container>
+          <div>
+            <Link to="/" className="nav-link">
+              {window.screen.width > 500 ? (
+                <img src={logo} alt="Le logo de l'entreprise Groupomania" />
+              ) : (
+                <img
+                  src={icon}
+                  alt="Le logo miniature de l'entreprise Groupomania"
+                />
+              )}
+            </Link>
+          </div>
+          <Navbar.Toggle aria-controls="navbarResponsive2" />
+          <Navbar.Collapse
+            id="navbarResponsive2"
+            className="justify-content-end"
+          >
+            <Nav className="align-items-end">
+              <Link to="/signup" className="nav-link mx-3">
+                S'inscrire
+              </Link>
+              <Link to="/login" className="nav-link mx-3">
+                Se connecter
+              </Link>
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
+    );
+  }
+
+  return (
+    <React.Fragment>
+      <AuthApi.Provider value={{ auth, setAuth }}>
+        <Router>
+          {navLink}
+          <Routes />
+        </Router>
+      </AuthApi.Provider>
+    </React.Fragment>
+  );
 }
-
-
-
-const App = () => {
-    const { userId, token, account, login, logout } = useAuth();
-    const routes = getRoutes(token);
-
-
-    return (
-        <AuthContext.Provider
-            value={{
-                isLoggedIn: !!token,
-                token: token,
-                userId: userId,
-                account: account,
-                login: login,
-                logout: logout,
-            }}
-        >
-            <Layout>{routes}</Layout>
-        </AuthContext.Provider>
-    );
-};
-
-export default App;
