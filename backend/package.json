@@ -12,7 +12,7 @@
     "api",
     "rest"
   ],
-  "author": "Theo Laurent",
+  "author": "Franck Kanza",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.0.1",
