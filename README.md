@@ -4,8 +4,6 @@
 
 - Créer un réseau social interne pour l'entreprise Groupomania.
 
-https://user-images.githubusercontent.com/79447999/132387415-1a1cd061-5271-4224-b338-59e065f5db7f.mp4
-
 ## 2) Technologies utilisées
 
 - Pour le frontend : `React`
