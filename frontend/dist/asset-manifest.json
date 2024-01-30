@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/TalkRoom/static/css/main.16f7c13d.chunk.css",
+    "main.js": "/TalkRoom/static/js/main.a011ddec.chunk.js",
+    "main.js.map": "/TalkRoom/static/js/main.a011ddec.chunk.js.map",
+    "runtime-main.js": "/TalkRoom/static/js/runtime-main.31eefb1a.js",
+    "runtime-main.js.map": "/TalkRoom/static/js/runtime-main.31eefb1a.js.map",
+    "static/js/2.dcb03545.chunk.js": "/TalkRoom/static/js/2.dcb03545.chunk.js",
+    "static/js/2.dcb03545.chunk.js.map": "/TalkRoom/static/js/2.dcb03545.chunk.js.map",
+    "static/js/3.b30dbde1.chunk.js": "/TalkRoom/static/js/3.b30dbde1.chunk.js",
+    "static/js/3.b30dbde1.chunk.js.map": "/TalkRoom/static/js/3.b30dbde1.chunk.js.map",
+    "index.html": "/TalkRoom/index.html",
+    "static/css/main.16f7c13d.chunk.css.map": "/TalkRoom/static/css/main.16f7c13d.chunk.css.map",
+    "static/js/2.dcb03545.chunk.js.LICENSE.txt": "/TalkRoom/static/js/2.dcb03545.chunk.js.LICENSE.txt",
+    "static/media/logo.deae4bcb.png": "/TalkRoom/static/media/logo.deae4bcb.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.31eefb1a.js",
+    "static/js/2.dcb03545.chunk.js",
+    "static/css/main.16f7c13d.chunk.css",
+    "static/js/main.a011ddec.chunk.js"
+  ]
+}
