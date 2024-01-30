@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import balloons from "../assets/sociale.jpeg";
+//import balloons from "../assets/sociale.jpeg";
 
 const Home = () => {
   return (
@@ -35,8 +35,8 @@ const Home = () => {
       <div className=" text-center">
         <img
           className="img-fluid"
-          src={balloons}
-          alt="Des personnages type cartoon pour embellir la page accueil du site"
+          src=''
+          alt=""
         />
       </div>
     </React.Fragment>
