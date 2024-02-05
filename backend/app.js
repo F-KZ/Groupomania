@@ -11,7 +11,7 @@ const session = require("express-session");
 //routes
 const userRoutes = require("./routes/userRoutes");
 const postRoutes = require("./routes/postRoutes");
-/*
+
 //
 let datecookie = new Date(Date.now() + 60 * 60 * 1000);
 app.use(
@@ -22,7 +22,7 @@ app.use(
     cookie: { secure: true, httpOnly: true, expires: datecookie },
   })
 );
-*/
+
 //CORS
 app.use(function (req, res, next) {
   res.setHeader("Access-Control-Allow-Origin", "*");
