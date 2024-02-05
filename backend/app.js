@@ -36,6 +36,7 @@ app.use(function (req, res, next) {
 
 app.use(helmet());
 app.use(express.json());
+app.use(express.static(path.join(__dirname, 'frontend')));
 
 app.use("/", (req,res) => {
   res.send("ça marche")
