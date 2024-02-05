@@ -14,7 +14,7 @@ const postRoutes = require("./routes/postRoutes");
 
 //
 let datecookie = new Date(Date.now() + 60 * 60 * 1000);
-app.use(
+/*app.use(
   session({
     secret: process.env.cookieSecret,
     resave: false,
@@ -22,7 +22,7 @@ app.use(
     cookie: { secure: true, httpOnly: true, expires: datecookie },
   })
 );
-
+*/
 //CORS
 app.use(function (req, res, next) {
   res.setHeader("Access-Control-Allow-Origin", "*");
