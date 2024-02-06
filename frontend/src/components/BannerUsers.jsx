@@ -8,7 +8,7 @@ export default function BannerUsers() {
 
   useEffect(
     function () {
-      fetch("http://localhost:4200/api/users/getAllUser", {
+      fetch("https://groupomania-backend-bs145jnru-fkz.vercel.app/api/users/getAllUser", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

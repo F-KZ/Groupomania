@@ -18,7 +18,7 @@ export default function PostComment(props) {
 
     const data = { idOfUser, id, comment };
 
-    fetch("http://localhost:4200/api/post/postComment", {
+    fetch("https://groupomania-backend-bs145jnru-fkz.vercel.app/api/post/postComment", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

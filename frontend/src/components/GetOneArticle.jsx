@@ -14,7 +14,7 @@ export default function GetOneArticle() {
 
   useEffect(
     function () {
-      fetch("http://localhost:4200/api/post/" + id, {
+      fetch("https://groupomania-backend-bs145jnru-fkz.vercel.app/api/post/" + id, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -45,7 +45,7 @@ export default function GetOneArticle() {
       if (
         window.confirm("Voulez vous vraiment supprimer cette publication ?")
       ) {
-        fetch("http://localhost:4200/api/post/" + id, {
+        fetch("https://groupomania-backend-bs145jnru-fkz.vercel.app/api/post/" + id, {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",

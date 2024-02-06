@@ -13,7 +13,7 @@ export default function GetComments(props) {
 
   useEffect(
     function () {
-      fetch("http://localhost:4200/api/post/getComment/" + id, {
+      fetch("https://groupomania-backend-bs145jnru-fkz.vercel.app/api/post/getComment/" + id, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

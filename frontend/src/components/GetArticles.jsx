@@ -11,7 +11,7 @@ export default function GetArticles(props) {
 
   useEffect(
     function () {
-      fetch("http://localhost:4200/api/post", {
+      fetch("https://groupomania-backend-bs145jnru-fkz.vercel.app/api/post", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

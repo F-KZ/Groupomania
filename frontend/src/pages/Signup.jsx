@@ -12,7 +12,7 @@ export default function Signup(props) {
   const [redirect, setRedirect] = useState(false);
 
   const onSubmit = async function (data) {
-    await fetch("http://localhost:4200/api/users/signup", {
+    await fetch("https://groupomania-backend-bs145jnru-fkz.vercel.app/api/users/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

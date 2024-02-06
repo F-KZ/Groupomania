@@ -15,7 +15,7 @@ export default function DeleteComment(props) {
     if (props.idUser === idOfUser || isAdmin === 1) {
       if (window.confirm("Voulez vous vraiment supprimer ce commentaire ?")) {
         fetch(
-          "http://localhost:4200/api/post/getComment/delete/" + idCommentaire,
+          "https://groupomania-backend-bs145jnru-fkz.vercel.app/api/post/getComment/delete/" + idCommentaire,
           {
             method: "delete",
             headers: {

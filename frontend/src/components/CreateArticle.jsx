@@ -25,7 +25,7 @@ export default function CreateArticle(props) {
     fd.append("attachment", data.attachment);
 
     axios
-      .post("http://localhost:4200/api/post/article", fd, {
+      .post("https://groupomania-backend-bs145jnru-fkz.vercel.app/api/post/article", fd, {
         headers: {
           "Content-Type": "application/json",
           Authorization: token,

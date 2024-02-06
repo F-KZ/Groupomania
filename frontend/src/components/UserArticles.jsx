@@ -9,7 +9,7 @@ export default function UserArticles() {
 
   useEffect(
     function () {
-      fetch("http://localhost:4200/api/users/UserArticles", {
+      fetch("https://groupomania-backend-bs145jnru-fkz.vercel.app/api/users/UserArticles", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

@@ -15,7 +15,7 @@ export default function UserDelete() {
         "Voulez vous vraiment supprimer votre compte ? Cela supprimera également les articles que vous avez publiés."
       )
     ) {
-      fetch("http://localhost:4200/api/users/userDelete", {
+      fetch("https://groupomania-backend-bs145jnru-fkz.vercel.app/api/users/userDelete", {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",

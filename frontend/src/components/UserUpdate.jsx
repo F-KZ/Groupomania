@@ -21,7 +21,7 @@ export default function UserUpdate() {
 
   useEffect(
     function data() {
-      fetch("http://localhost:4200/api/users/getuser", {
+      fetch("https://groupomania-backend-bs145jnru-fkz.vercel.app/api/users/getuser", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -57,7 +57,7 @@ export default function UserUpdate() {
     fd.append("bio", bio);
 
     axios
-      .post("http://localhost:4200/api/users/userUpdate", fd, {
+      .post("https://groupomania-backend-bs145jnru-fkz.vercel.app/api/users/userUpdate", fd, {
         headers: {
           "Content-Type": "application/json",
           Authorization: token,

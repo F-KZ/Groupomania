@@ -9,7 +9,7 @@ export default function Login() {
   const { register, handleSubmit } = useForm();
 
   const onSubmit = function (data) {
-    fetch("http://localhost:4200/api/users/login", {
+    fetch("https://groupomania-backend-bs145jnru-fkz.vercel.app/api/users/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

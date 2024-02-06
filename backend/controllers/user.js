@@ -16,7 +16,7 @@ exports.signup = function (req, res, next) {
         email: req.body.email,
         password: hash,
         bio: req.body.bio,
-        imageUrl: "http://localhost:4200/images/imageProfilDéfaut.png",
+        imageUrl: "https://groupomania-backend-bs145jnru-fkz.vercel.app/images/imageProfilDéfaut.png",
       };
       db.query(`INSERT INTO user SET ?`, [user], function (error) {
         console.log([user]);
