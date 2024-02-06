@@ -7,7 +7,7 @@ import AuthApi from "./components/utils/AuthApi.jsx";
 import Logout from "./components/utils/Logout.jsx";
 //import css
 import { Navbar, Nav, Container } from "react-bootstrap";
-import "./app.css";
+//import "./app.css" ;
 //import logo
 import logo from "./assets/logo.png";
 import icon from "./assets/icon.png";
